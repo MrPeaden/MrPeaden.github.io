@@ -55,8 +55,8 @@ createPlatform(0,300,500,500)
 
 createCollectable("database", 100,200,10, 0.8)
 createCollectable("max", 150,250,8, 0.6)
-createCollectable("grace", 175,275,6, 0.6)    
-createCollectable("steve", 175,275,6, 0.6)
+createCollectable("grace", 175,275,6, 0.3)    
+createCollectable("steve", 175,275,6, 0.1)
 
     // TODO 3
     // Create cannons
@@ -65,8 +65,10 @@ createCollectable("steve", 175,275,6, 0.6)
     // example usage: createCannon(side, position, delay, width, height)
 
 createCannon("left",20, 500)
-createCannon("right",50,500)
-createCannon("top",100,800)
+createCannon("right",50,800)
+createCannon("top",175,800)
+createCannon("bottom",175,2000)
+createCannon("bottom",300,2000)
     
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
