@@ -39,11 +39,11 @@ $(function () {
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
 
-createPlatform(0,5,100,100)
-createPlatform(0,50,200,200)
-createPlatform(0,100,300,300)
-createPlatform(0,200,400,400)
-createPlatform(0,300,500,500)
+createPlatform(500, 650, 100, 90)
+createPlatform(650,620,50,120)
+createPlatform(775,550,30,190)
+createPlatform(805,575,75,2)
+createPlatform(950,650,50,150)
     
 
     // TODO 2
@@ -57,18 +57,18 @@ createCollectable("database", 100,200,10, 0.8)
 createCollectable("max", 150,250,8, 0.6)
 createCollectable("grace", 175,275,6, 0.3)    
 createCollectable("steve", 175,275,6, 0.1)
-
+createCollectable("kennedi",1000, 600, 10,0.9)
     // TODO 3
     // Create cannons
     // You must decide the wall you want the cannon on, the position on the wall, and the time between shots in milliseconds
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
 
-createCannon("left",20, 500)
-createCannon("right",50,800)
-createCannon("top",175,800)
-createCannon("bottom",175,2000)
-createCannon("bottom",300,2000)
+createCannon("left",400, 800)
+//createCannon("right",450,1300)
+createCannon("top",600,2200)
+createCannon("top",300,2000)
+createCannon("top",1000,2500)
     
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////

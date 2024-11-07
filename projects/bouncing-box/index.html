@@ -9,7 +9,7 @@
 		.box {
 			width: 70px;
 			height: 70px;
-			background-color: teal;
+			background-color: green;
 			font-size: 300%;
 			text-align: center;
 			user-select: none;
@@ -52,8 +52,9 @@
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css("top", newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -67,9 +68,24 @@
 
 			// TODO 2 - Variable declarations 
 
-			var positionX = 0
-			var points = 0
-			var speed = 10
+			var newPositionX = 0;
+			var points = 0;
+			var speed = 10;
+
+			var newPositionY = 0;
+			var speedY = 2;
+		
+
+			var boardHeight = board.height();
+			var boardWidth = board.width();
+
+			var speedMultiplier = 1;
+
+			//var colorStr = "rgb(50,4,200)";
+
+
+			//var newPositionX = 0
+			//var newText = 0
 
 
 			/* 
@@ -78,15 +94,49 @@
 			turn it around! 
 			*/
 			function update() {
-				/*This will increase positionX by 10 */
-				positionX += speed
-				if (positionX > boardWidth){
+
+				if (points % 3 === 0){
+					/*This will increase newPositionX by speed */
+				newPositionX += speed
+				if (newPositionX >= boardWidth){
+					speed *= -1
+				
+				} else if (newPositionX <= 0){
 					speed *= -1
 				}
-				if (positionX < 0){
-					speed *= -1
+
+				/*This will increase newPositionY by speed */
+				newPositionY += speedY
+				if (newPositionY >= boardHeight){
+					speedY *= -1
+				
+				} else if (newPositionY <= 0){
+					speedY *= -1
 				}
-				moveBoxTo(positionX)
+			}
+
+
+
+
+				/*This will increase newPositionX by speed */
+				//newPositionX += speed
+				//if (newPositionX >= boardWidth){
+				//	speed *= -1
+				
+				//} else if (newPositionX <= 0){
+				//	speed *= -1
+				//}
+
+				/*This will increase newPositionY by speed */
+				//newPositionY += speedY
+				//if (newPositionY >= boardHeight){
+				//	speedY *= -1
+				
+				//} else if (newPositionY <= 0){
+				//	speedY *= -1
+				//}
+				
+				moveBoxTo(newPositionX, newPositionY)
 
 			};
 
@@ -95,17 +145,87 @@
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
+
+			function changePositionX (boardWidth){
+                newPositionX = (Math.random() * boardWidth)
+            }
+
+            function changePositionY (boardHeight){
+                newPositionY = (Math.random() * boardHeight)
+            }
+
+			function getRandomColor(){
+				//these lines of code will generate an integer between 0 and 256
+				var r = Math.floor(Math.random() * 256);
+				var g = Math.floor(Math.random() * 256);
+				var b = Math.floor(Math.random() * 256);
+				//now I need to concatenate this to form the color change parameter
+
+				return 'rgb(' + r + ',' + g + ',' + b + ')';
+
+				//return "rgb(" + "," + r + "," + g + "," + b + ")";
+
+				//return "rgb(" + "," + r + "," + g + "," + b + ")"
+				//colorStr = "rgb(" + "," + r + "," + g + "," + b + ")"
+
+				//box.css("background-color", colorStr);
+			}
+
+
+
+
 			function handleBoxClick() {
-				positionX = 0
+				//positionX = 0
 				points += 1
 				/*speed += 3*/
+
+				changePositionX (boardWidth)
+				changePositionY (boardHeight)
+				//if (speed > 0){
+				//	speed += 3
+				//} else if (speed < 0){
+				//	speed -= 3
+				//}
+				//newText = points
+				changeBoxText(points)
+
+				//for every three clicks the color will be red, but some random color on every other click
+				if (points % 3 === 0){
+					speedMultiplier += 0.2
+					box.css("background-color", "red");
+				}
+
 				if (speed > 0){
-					speed += 3
+					speed += 3 * speedMultiplier
 				}
 				if (speed < 0){
-					speed -= 3
+					speed -= 3 * speedMultiplier
 				}
-				changeBoxText(points)
+
+					
+				} else {
+					box.css("background-color", getRandomColor());
+				}
+				
+				
+				//box.css("background-color", getRandomColor());
+
+				//if (points === 2) {
+				//	box.css("background-color", "green");
+			    //}
+
+				//if (points === 3) {
+				//	box.css("background-color", "white");
+				//}
+
+				//if (points === 4) {
+				//	box.css("background-color", "blue");
+				//}
+
+				//if (points === 5) {
+				//	box.css("background-color", "red");
+				//}
+			update()
 			};
 
 
