@@ -200,10 +200,13 @@ function hasHitWall() {
     
     HINT: What will the row and column of the snake's head be if this were the case?
   */
-
-
-
-  return false;
+  if(snake.head.row < 0 ||
+     snake.head.row >= ROWS ||
+     snake.head.column < 0 ||
+     snake.head.column >= COLUMNS ){
+    return true;
+  }
+    else return false;
 }
 
 function hasCollidedWithApple() {
