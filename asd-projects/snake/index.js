@@ -38,6 +38,11 @@ var updateInterval;
 // variable to keep track of the key (keycode) last pressed by the user
 var activeKey;
 
+// here is my collor variable
+var colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+var colorIndex = 0
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////// GAME SETUP //////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -53,10 +58,20 @@ function init() {
 
    // is this TODO 5, Part 3 location?
     snake.body = []; // Start with an empty body
+  
     makeSnakeSquare(10, 10); // Create the first square in the middle of the board
+    snake.tail.element.css("backgroundColor", colors[colorIndex]);
+    colorIndex = Math.floor(Math.random() * colors.length);  //I like the idea here of a random color from the array to get a truly colorfull snake
+  
     makeSnakeSquare(10, 9); // Create a second square to the left of the first
+    snake.tail.element.css("backgroundColor", colors[colorIndex]);
+    colorIndex = Math.floor(Math.random() * colors.length);  //I like the idea here of a random color from the array to get a truly colorfull snake
+  
     makeSnakeSquare(10, 8); // Create a third square to the left of the second
     snake.head = snake.body[0]; // Mark the first segment as the head
+    colorIndex = Math.floor(Math.random() * colors.length);  //I like the idea here of a random color from the array to get a truly colorfull snake
+
+    
   
   
   // TODO 4, Part 3: initialize the apple
@@ -251,8 +266,14 @@ function hasCollidedWithSnake() {
     head and each part of the snake's body also knows its own row and column.
   */
 
-
-
+  for (var i = 1; i < snake.body.length; i++) {
+    if (
+      snake.head.row === snake.body[i].row &&    //both the row and column must be the same for a collision
+      snake.head.column === snake.body[i].column
+    ) {
+      return true;
+    }
+  }
   return false;
 }
 
@@ -407,9 +428,16 @@ function getRandomAvailablePosition() {
       spaceIsAvailable to false so that a new position is generated.
     */
 
-
-
+   for (var i = 0; i < snake.body.length; i++) {
+      if (
+        snake.body[i].row === randomPosition.row &&
+        snake.body[i].column === randomPosition.column
+      ) {
+        spaceIsAvailable = false;
+      }
+    }
   }
+
 
   return randomPosition;
 }
