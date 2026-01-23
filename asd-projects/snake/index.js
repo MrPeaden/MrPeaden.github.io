@@ -112,8 +112,17 @@ function checkForNewDirection(event) {
   }
 
   // FILL IN THE REST
+  else if (activeKey === KEY.RIGHT) {
+    snake.head.direction = "right";
+  }
+   else if (activeKey === KEY.UP) {
+    snake.head.direction = "up";
+  }
+   else if (activeKey === KEY.DOWN) {
+    snake.head.direction = "down";
+  }
 
-  // console.log(snake.head.direction);     // uncomment me!
+  //console.log(snake.head.direction);     // uncomment me!
 }
 
 function moveSnake() {
@@ -125,7 +134,14 @@ function moveSnake() {
     stored in the Array snake.body and each part knows its current 
     column/row properties. 
   */
+  for ( /* start, stop, and update statements to loop backwards through the indexes of snake.body */ ) {
+    var currentSnakeSquare = "???";
+    var snakeSquareInFront = "???";
 
+    moveBodyAToBodyB(currentSnakeSquare, snakeSquareInFront);
+
+    repositionSquare(currentSnakeSquare);
+}
 
 
 
@@ -139,16 +155,42 @@ function moveSnake() {
     HINT: The snake's head will need to move forward 1 square based on the value
     of snake.head.direction which may be one of "left", "right", "up", or "down"
   */
+  if (snake.head.direction === "left") {
+  snake.head.column = snake.head.column - 1;
+  }
+  else if (snake.head.direction === "right") {
+  snake.head.column = snake.head.column + 1;
+  }
+  else if (snake.head.direction === "up") {
+  snake.head.column = snake.head.row - 1;
+  }
+  else if (snake.head.direction === "down") {
+  snake.head.column = snake.head.row + 1;
+  }
 
-
-
+  repositionSquare(snake.head);
 
 }
 
 // TODO 9: Create a new helper function
 
+function moveBodyAToBodyB(bodyA, bodyB){
+  bodyA.row = bodyB.row;
+  bodyA.column = bodyB.column;
+  bodyA.direction = bodyB.direction;
+}
 
+// var bodyA = { row: 5, column: 5, direction: "right" };
+// var bodyB = { row: 6, column: 5, direction: "down" };
+// console.log(`before moving, body A: ${JSON.stringify(bodyA)}`); // Should log: { row: 5, column: 5, direction: "right" }
+// moveBodyAToBodyB(bodyA, bodyB);
+// console.log(`after moving, body A: ${JSON.stringify(bodyA)}`); // Should log: { row: 6, column: 5, direction: "down" } || Note the match with bodyB
 
+// console.log("Moving body A to body B...");
+// setTimeout(() => {
+//   moveBodyAToBodyB(snake.body[1], snake.head);
+//   repositionSquare(snake.body[1]);
+// }, 2_000);
 
 
 function hasHitWall() {
